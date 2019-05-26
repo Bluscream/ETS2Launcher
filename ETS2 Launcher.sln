@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28822.285
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ETS2 Launcher", "ETS2 Launcher.csproj", "{B8BD852D-DD3D-4A90-BBD5-393B9CA82467}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sii", "..\sii-unit-parser\Sii\Sii.csproj", "{DB29E99B-4EBE-4ED9-8378-864CE601149F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ETS2_saveeditor", "..\ets2_savegame_editor\ets2_saveedit\WindowsFormsApplication1\ETS2_saveeditor.csproj", "{C69B6C8A-7203-432C-A584-FC1DEC688A19}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TruckersMP-Launcher", "..\TruckersMP-Launcher\TruckersMP-Launcher.csproj", "{7262F0ED-289C-42A2-AD5E-FFB5EEF2BC53}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B8BD852D-DD3D-4A90-BBD5-393B9CA82467}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8BD852D-DD3D-4A90-BBD5-393B9CA82467}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8BD852D-DD3D-4A90-BBD5-393B9CA82467}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B8BD852D-DD3D-4A90-BBD5-393B9CA82467}.Debug|x64.Build.0 = Debug|Any CPU
+		{B8BD852D-DD3D-4A90-BBD5-393B9CA82467}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8BD852D-DD3D-4A90-BBD5-393B9CA82467}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8BD852D-DD3D-4A90-BBD5-393B9CA82467}.Release|x64.ActiveCfg = Release|Any CPU
+		{B8BD852D-DD3D-4A90-BBD5-393B9CA82467}.Release|x64.Build.0 = Release|Any CPU
+		{DB29E99B-4EBE-4ED9-8378-864CE601149F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB29E99B-4EBE-4ED9-8378-864CE601149F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB29E99B-4EBE-4ED9-8378-864CE601149F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DB29E99B-4EBE-4ED9-8378-864CE601149F}.Debug|x64.Build.0 = Debug|Any CPU
+		{DB29E99B-4EBE-4ED9-8378-864CE601149F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB29E99B-4EBE-4ED9-8378-864CE601149F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB29E99B-4EBE-4ED9-8378-864CE601149F}.Release|x64.ActiveCfg = Release|Any CPU
+		{DB29E99B-4EBE-4ED9-8378-864CE601149F}.Release|x64.Build.0 = Release|Any CPU
+		{C69B6C8A-7203-432C-A584-FC1DEC688A19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C69B6C8A-7203-432C-A584-FC1DEC688A19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C69B6C8A-7203-432C-A584-FC1DEC688A19}.Debug|x64.ActiveCfg = Debug|x64
+		{C69B6C8A-7203-432C-A584-FC1DEC688A19}.Debug|x64.Build.0 = Debug|x64
+		{C69B6C8A-7203-432C-A584-FC1DEC688A19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C69B6C8A-7203-432C-A584-FC1DEC688A19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C69B6C8A-7203-432C-A584-FC1DEC688A19}.Release|x64.ActiveCfg = Release|x64
+		{C69B6C8A-7203-432C-A584-FC1DEC688A19}.Release|x64.Build.0 = Release|x64
+		{7262F0ED-289C-42A2-AD5E-FFB5EEF2BC53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7262F0ED-289C-42A2-AD5E-FFB5EEF2BC53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7262F0ED-289C-42A2-AD5E-FFB5EEF2BC53}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7262F0ED-289C-42A2-AD5E-FFB5EEF2BC53}.Debug|x64.Build.0 = Debug|Any CPU
+		{7262F0ED-289C-42A2-AD5E-FFB5EEF2BC53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7262F0ED-289C-42A2-AD5E-FFB5EEF2BC53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7262F0ED-289C-42A2-AD5E-FFB5EEF2BC53}.Release|x64.ActiveCfg = Release|Any CPU
+		{7262F0ED-289C-42A2-AD5E-FFB5EEF2BC53}.Release|x64.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B17A8DBB-CC64-4002-A41E-8AB6AB805101}
+	EndGlobalSection
+EndGlobal

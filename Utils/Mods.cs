@@ -1,0 +1,167 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System.Diagnostics;
+
+namespace ETS2Launcher.Utils
+{
+    public class Mods
+    {
+        public static List<Mod> CheckForUpdates(List<Mod> mods)
+        {
+            for (int i = 0; i < mods.Count; i++)
+            {
+                mods[i] = CheckForUpdate(mods[i]);
+            }
+            return mods;
+        }
+        public static Mod CheckForUpdate(Mod mod)
+        {
+            var sb = new StringBuilder();
+            switch (mod.Name)
+            {
+                default: break;
+            }
+            return mod;
+        }
+        public static Mod EnableMod(Mod mod)
+        {
+            if (mod.File.Directory.Name != "Disabled") {
+                Logger.Warn("Mod", mod.Name, "is already in folder", mod.File.Directory.Name);
+                return mod;
+            }
+            var newPath = Path.Combine(mod.File.Directory.Parent.FullName, mod.File.Name);
+            Logger.Debug("Moving mod", mod.Name, "to", newPath);
+            mod.File.MoveTo(newPath);
+            mod.File = new FileInfo(newPath);
+            mod.Enabled = true;
+            return mod;
+        }
+        public static Mod DisableMod(Mod mod)
+        {
+            if (mod.File.Directory.Name == "Disabled") {
+                Logger.Warn("Mod", mod.Name, "is already in folder", mod.File.Directory.Name);
+                return mod;
+            }
+            var newPath = Path.Combine(mod.File.DirectoryName, "Disabled", mod.File.Name);
+            Logger.Debug("Moving mod", mod.Name, "to", newPath);
+            mod.File.MoveTo(newPath);
+            mod.File = new FileInfo(newPath);
+            mod.Enabled = false;
+            return mod;
+        }
+        public static List<Mod> GetMods()
+        {
+            var ret = new List<Mod> { };
+            var gamePath = Utils.getGamePath();
+            var modPaths = new List<string>() {
+                Path.Combine(gamePath.DirectoryName, "Mods"),
+                Path.Combine(gamePath.DirectoryName, "Modules"),
+                Path.Combine(gamePath.DirectoryName, "Plugins"),
+                Path.Combine(gamePath.DirectoryName, "VRChat_Data", "Managed", "VRLoader", "Modules")
+            };
+            foreach (var modPath in modPaths)
+            {
+                if (!Directory.Exists(modPath)) continue;
+                foreach (var file in Directory.GetFiles(modPath, "*.dll", SearchOption.TopDirectoryOnly)) {
+                    var mod = GetMod(file);
+                    if (mod == null) continue;
+                    mod.Enabled = true;
+                    ret.Add(mod);
+                }
+                var disabledModPath = Path.Combine(modPath, "Disabled");
+                if (!Directory.Exists(disabledModPath)) continue;
+                foreach (var file in Directory.GetFiles(disabledModPath, "*.dll", SearchOption.TopDirectoryOnly)) {
+                    var mod = GetMod(file);
+                    if (mod == null) continue;
+                    mod.Enabled = false;
+                    ret.Add(mod);
+                }
+            }
+            Logger.Log("Loaded", ret.Count.ToString(), "mods from", modPaths.Count.ToString(), "folders");
+            return ret;
+        }
+ 
+        public static Mod GetMod(string file)  {
+            var mod = new Mod();
+            // mod.Type = ModLoaderType.Unknown;
+            mod.File = new FileInfo(file);
+            if (mod.File.Extension.ToLower() != ".dll") return null;
+            mod.Name = mod.File.FileNameWithoutExtension();
+            try
+            {
+                FileVersionInfo verInfo = FileVersionInfo.GetVersionInfo(mod.File.FullName);
+                if (!string.IsNullOrEmpty(verInfo.ProductName)) mod.Name = verInfo.ProductName;
+                if (!string.IsNullOrEmpty(verInfo.InternalName)) mod.Name += $" ({verInfo.InternalName})";
+                mod.Author = verInfo.CompanyName;
+                mod.Version = string.IsNullOrEmpty(verInfo.ProductVersion) ? verInfo.FileVersion : verInfo.ProductVersion;
+                mod.Description = verInfo.FileDescription;
+            } catch (Exception ex) {
+                mod.Error = ex.Message;
+            }
+            try {
+                // mod = GetModInfo(mod);
+            } catch (Exception ex) {
+                Logger.Error("Can't load mod info for", mod.File.Name.Quote(), ex.Message.Enclose(), Environment.NewLine, ex.StackTrace);
+                mod.Error = ex.Message;
+            }
+            return mod;
+        }
+        /*public static Mod GetModInfo(Mod mod) {
+            var types = GetTypes(mod);
+            // [ModuleInfo("Freecam/Drone", "1.0", "CJ - Credit to the real Meep <3 Join today | https://discord.gg/xgPdrGP")]
+            // [VRCModInfo("Single Instance", "2.1", "Bluscream")]
+            foreach (var type in types)
+            {
+                CustomAttribute ignoreAttribute;
+                if (TryGetCustomAttribute(type, "VRLoader.Attributes.ModuleInfoAttribute", out ignoreAttribute)) 
+                {
+                    mod.Type = ModLoaderType.VRLoader;
+                    mod.Name = (string)ignoreAttribute.ConstructorArguments[0].Value;
+                    mod.Version = (string)ignoreAttribute.ConstructorArguments[1].Value;
+                    mod.Author = (string)ignoreAttribute.ConstructorArguments[2].Value;
+                    return mod;
+                }
+                else if (TryGetCustomAttribute(type, "VRCModLoader.VRCModInfoAttribute", out ignoreAttribute))
+                {
+                    mod.Type = ModLoaderType.VRCModloader;
+                    mod.Name = (string)ignoreAttribute.ConstructorArguments[0].Value;
+                    mod.Version = (string)ignoreAttribute.ConstructorArguments[1].Value;
+                    mod.Author = (string)ignoreAttribute.ConstructorArguments[2].Value;
+                    return mod;
+                }
+            }
+            return mod;
+        }*/
+
+        public class Mod {
+            public FileInfo File { get; set; }
+            public string Error { get; set; }
+            public bool Enabled { get; set; }
+            public string Name { get; set; }
+            public ModLoaderType Type { get; set; }
+            public string Version { get; set; }
+            public string Author { get; set; }
+            public string Description { get; set; }
+            public ModUpdate Update { get; set; }
+        }
+        public class ModUpdate {
+            public string newVersion { get; set; }
+            public string hash { get; set; }
+            public string downloadURL { get; set; }
+            public bool isArchive { get; set; }
+        }
+        public enum ModLoaderType {
+            Unknown,
+            VRCModloader,
+            VRLoader
+        }
+    }
+}
