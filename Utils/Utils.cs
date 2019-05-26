@@ -7,28 +7,19 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Windows.Forms;
 using System.Net;
+using System.Collections.Generic;
 
 namespace ETS2Launcher.Utils
 {
     public static partial class Utils
     {
         static FileInfo ownBinary;
-        static FileInfo gameBinary;
         public static FileInfo getOwnPath()
         {
             if (ownBinary == null) {
                 ownBinary = new FileInfo(Path.GetFullPath(Application.ExecutablePath));
             }
             return ownBinary;
-        }
-        public static  FileInfo getGamePath()
-        {
-            if (gameBinary == null) {
-                var ownPath = Path.GetDirectoryName(Application.ExecutablePath);
-                var gamePath = Path.Combine(ownPath, "bin", "win_x64", "eurotrucks2.exe");
-                gameBinary = new FileInfo(gamePath);
-            }
-            return gameBinary;
         }
         /*[DllImport("User32.dll")]
         public static extern Int32 SetForegroundWindow(int hWnd);*/

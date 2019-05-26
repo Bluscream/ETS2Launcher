@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using Microsoft.Win32;
 using ETS2Launcher.Utils;
 
-namespace VRChatLauncher.Setup
+namespace ETS2Launcher.Setup
 {
     class URI
     {
@@ -15,11 +15,11 @@ namespace VRChatLauncher.Setup
             ret.key = (string)Registry.GetValue(key, null, null);
             if (ret.key == null) return ret;
             // Logger.Trace("key=", ret.key);
-            var steamFile =Path.Combine(Utils.getOwnPath().DirectoryName, "launch.bat");
+            var steamFile =Path.Combine(Utils.Utils.getOwnPath().DirectoryName, "launch.bat");
             var expected_steam = $@"""{steamFile}"" ""%1"""; // ""{ownPath}"" 
             // Logger.Trace("expected_steam=", expected_steam);
             if (expected_steam == ret.key) { ret.match = URIResponse.URIEnum.DEFAULT; return ret; }
-            ret.expected = $@"""{Utils.getOwnPath().FullName}"" ""%1"""; // ""{ownPath}"" 
+            ret.expected = $@"""{Utils.Utils.getOwnPath().FullName}"" ""%1"""; // ""{ownPath}"" 
             // Logger.Trace("expected=", ret.expected);
             if (ret.key != ret.expected) ret.match = URIResponse.URIEnum.WRONG;
             else ret.match = URIResponse.URIEnum.INSTALLED;

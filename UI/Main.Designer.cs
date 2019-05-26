@@ -504,6 +504,8 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Main";
             this.Text = "Euro Truck Simulator 2 Launcher";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
+            this.Load += new System.EventHandler(this.Main_Load);
             this.panel_full.ResumeLayout(false);
             this.tabs_main.ResumeLayout(false);
             this.tab_mods.ResumeLayout(false);

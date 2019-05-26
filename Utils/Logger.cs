@@ -60,9 +60,14 @@ namespace ETS2Launcher.Utils
             var seperator = lines ? Environment.NewLine : " ";
             foreach(var msg in msgs) {
                 try { str += seperator + (string)msg;
-                } catch (Exception ex) {
-                    // Console.WriteLine($"Error {ex.ToString()}");
-                    str += seperator + msg.ToString();
+                } catch (Exception) {
+                    try {
+                        str += seperator + msg.ToJson();
+                    } catch (Exception) {
+                        try {
+                            str += seperator + msg.ToString();
+                        } catch (Exception) { }
+                    }
                 }
             }
             var line = $"[{timestamp}] {logLevel} - {cName}.{mName}: {str}";

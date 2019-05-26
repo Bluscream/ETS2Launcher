@@ -20,8 +20,14 @@ namespace ETS2Launcher.Utils
         {
             return (dateTime - DateTime.Now).TotalMinutes < minutes;
         }
-#endregion
- #region FileInfo
+        #endregion
+        #region DirectoryInfo
+        public static DirectoryInfo Combine(this DirectoryInfo directory, params string[] paths)
+        {
+            return new DirectoryInfo(Path.Combine(directory.FullName, string.Join(Path.DirectorySeparatorChar.ToString(), paths)));
+        }
+        #endregion
+        #region FileInfo
         public static string FileNameWithoutExtension(this FileInfo file) {
             return Path.GetFileNameWithoutExtension(file.Name);
         }

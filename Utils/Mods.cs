@@ -60,12 +60,9 @@ namespace ETS2Launcher.Utils
         public static List<Mod> GetMods()
         {
             var ret = new List<Mod> { };
-            var gamePath = Utils.getGamePath();
+            var gamePath = Game.getDirectory().FullName;
             var modPaths = new List<string>() {
-                Path.Combine(gamePath.DirectoryName, "Mods"),
-                Path.Combine(gamePath.DirectoryName, "Modules"),
-                Path.Combine(gamePath.DirectoryName, "Plugins"),
-                Path.Combine(gamePath.DirectoryName, "VRChat_Data", "Managed", "VRLoader", "Modules")
+                Path.Combine(gamePath, "mod")
             };
             foreach (var modPath in modPaths)
             {
