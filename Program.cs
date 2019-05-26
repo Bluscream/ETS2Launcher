@@ -10,6 +10,7 @@ namespace ETS2Launcher
     static class Program
     {
         public static Main mainWindow;
+        public static List<string> args;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -22,9 +23,9 @@ namespace ETS2Launcher
             Logger.ClearLog();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            var args = Environment.GetCommandLineArgs().Skip(1).ToArray();
-            if (args.Length > 0) Logger.Warn("Catched command line arguments:");
-            for (int i = 0; i < args.Length; i++)
+            args = Environment.GetCommandLineArgs().Skip(1).ToList();
+            if (args.Count > 0) Logger.Warn("Catched command line arguments:");
+            for (int i = 0; i < args.Count; i++)
             {
                 Logger.Warn($"[{i}]", args[i]);
             }
@@ -37,7 +38,7 @@ namespace ETS2Launcher
             Logger.Log("Launcher already running:", launcher_running.ToString());
             var game_running = Game.IsGameAlreadyRunning();
             Logger.Log("Game already running:", game_running.ToString());
-            mainWindow = new Main(args);
+            mainWindow = new Main();
             Application.Run(mainWindow);
             Logger.Trace("END");
         }

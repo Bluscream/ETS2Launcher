@@ -70,7 +70,7 @@ namespace ETS2Launcher.Utils
                 item.Text = line;
                 Main.selflog.Items.Add(item);
             }*/
-            if (Program.mainWindow.txt_status != null && logLevel > LogLevel.Debug) {
+            if (Program.mainWindow != null && Program.mainWindow.txt_status != null && logLevel > LogLevel.Debug) {
                 Program.mainWindow.txt_status.Text = line;
                 Program.mainWindow.txt_status.ForeColor = newColor.Item1;
             }

@@ -25,7 +25,7 @@ namespace ETS2Launcher.Utils
         {
             if (gameBinary == null) {
                 var ownPath = Path.GetDirectoryName(Application.ExecutablePath);
-                var gamePath = Path.Combine(ownPath, "VRChat.exe");
+                var gamePath = Path.Combine(ownPath, "bin", "win_x64", "eurotrucks2.exe");
                 gameBinary = new FileInfo(gamePath);
             }
             return gameBinary;
@@ -71,7 +71,7 @@ namespace ETS2Launcher.Utils
             proc.UseShellExecute = true;
             proc.WorkingDirectory = Environment.CurrentDirectory;
             proc.FileName = Assembly.GetEntryAssembly().CodeBase;
-            proc.Arguments += string.Join(" ", Main.args);
+            proc.Arguments += string.Join(" ", Program.args);
             proc.Verb = "runas";
             try
             {

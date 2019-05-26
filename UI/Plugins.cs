@@ -10,13 +10,13 @@ using System.Windows.Forms;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using ETS2Launcher.Utils;
-using static ETS2Launcher.Utils.Mods;
+using static ETS2Launcher.Utils.Plugins;
 
 namespace ETS2Launcher
 {
     public partial class Main : MaterialForm
     {
-        public static List<Mod> mods;
+/*        public static List<Plugin> plugins;
         private void SetupInstalledMods(bool force=false)
         {
             if (mods == null || force) {
@@ -41,11 +41,10 @@ namespace ETS2Launcher
         private void List_mods_installed_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-        }
-
-        private void Btn_mods_reload_Click(object sender, EventArgs e)
+        }*/
+        private void Btn_plugins_reload_Click(object sender, EventArgs e)
         {
-            SetupInstalledMods(force: true);
+
         }
     }
 }

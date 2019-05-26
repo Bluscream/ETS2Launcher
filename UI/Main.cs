@@ -16,7 +16,7 @@ namespace ETS2Launcher
     {
         private static MaterialSkinManager materialSkinManager;
         public TextBox statusBar;
-        public Main(string[] args)
+        public Main()
         {
             InitializeComponent();
             statusBar = txt_status;
@@ -48,15 +48,15 @@ namespace ETS2Launcher
             if (darkMode)
             {
                 materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
-                list_mods_installed.BackColor = Color.FromArgb(255, 40, 40, 40);
-                list_mods_installed.ForeColor = Color.WhiteSmoke;
+                lst_mods_installed.BackColor = Color.FromArgb(255, 40, 40, 40);
+                lst_mods_installed.ForeColor = Color.WhiteSmoke;
                 // textBoxDirectory.BackColor = Color.FromArgb(255, 40, 40, 40);
             }
             else
             {
                 materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
-                list_mods_installed.BackColor = Color.White;
-                list_mods_installed.ForeColor = Color.Black;
+                lst_mods_installed.BackColor = Color.White;
+                lst_mods_installed.ForeColor = Color.Black;
                 // textBoxDirectory.BackColor = Color.WhiteSmoke;
             }
 
@@ -93,5 +93,6 @@ namespace ETS2Launcher
             // ReRenderListView();
         }
         #endregion
+
     }
 }
